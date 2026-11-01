@@ -394,7 +394,7 @@ Targeted for AMD/Xilinx Artix-7 (`xc7a35ticsg324-1L`) using Vivado Synthesis:
 * **Lead Architect:** Aziz Gharbi
 * **Institution:** National School of Computer Sciences (ENSI), Tunisia
 * **Specialization:** Embedded Systems, IC Design & Digital Hardware Verification
-* **Target Industry:** Siemens Digital Industries Software (Siemens EDA / Mentor Graphics)
+
 
 ---
 
