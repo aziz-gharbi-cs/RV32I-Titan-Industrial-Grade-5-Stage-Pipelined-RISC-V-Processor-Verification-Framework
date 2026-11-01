@@ -5,7 +5,7 @@ use work.wb_pkg.all;
 
 entity wb_uart is
     generic (
-        CLKS_PER_BIT : integer := 868 -- 100MHz / 115200 baud
+        CLKS_PER_BIT : integer := 16
     );
     port (
         clk    : in  std_logic;
@@ -22,32 +22,17 @@ architecture rtl of wb_uart is
     signal clk_cnt    : integer range 0 to CLKS_PER_BIT := 0;
     signal bit_idx    : integer range 0 to 7 := 0;
     signal tx_shift   : std_logic_vector(7 downto 0) := (others => '0');
-    signal tx_busy    : std_logic := '0';
+    signal tx_busy    : std_logic;
 begin
 
+    -- Busy whenever not in IDLE
     tx_busy <= '0' when state = IDLE else '1';
 
-    -- Wishbone Bus Responder
-    process(clk)
-    begin
-        if rising_edge(clk) then
-            if rst = '1' then
-                resp <= WB_RESP_IDLE;
-            else
-                resp.ack <= req.cyc and req.stb;
-                resp.err <= '0';
-                
-                -- Offset 0x0: Data Register, Offset 0x4: Status Register (bit 0 = busy)
-                if req.adr(2) = '1' then
-                    resp.dat <= (0 => tx_busy, others => '0');
-                else
-                    resp.dat <= (others => '0');
-                end if;
-            end if;
-        end if;
-    end process;
+    -- Combinational bus response
+    resp.ack <= req.cyc and req.stb;
+    resp.err <= '0';
+    resp.dat <= (0 => tx_busy, others => '0') when req.adr(2) = '1' else (others => '0');
 
-    -- UART Transmitter Finite State Machine
     process(clk)
     begin
         if rising_edge(clk) then
@@ -59,7 +44,7 @@ begin
             else
                 case state is
                     when IDLE =>
-                        tx_out <= '1';
+                        tx_out  <= '1';
                         clk_cnt <= 0;
                         bit_idx <= 0;
                         if (req.cyc = '1' and req.stb = '1' and req.we = '1' and req.adr(2) = '0') then
