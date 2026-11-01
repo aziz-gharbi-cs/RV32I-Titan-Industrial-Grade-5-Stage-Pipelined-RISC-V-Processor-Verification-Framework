@@ -59,6 +59,9 @@ begin
             when "1001" => -- AND
                 s_result <= a and b;
 
+            when "1010" => -- LUI (Pass operand B)
+                s_result <= b;
+
             when others =>
                 s_result <= (others => '0');
         end case;

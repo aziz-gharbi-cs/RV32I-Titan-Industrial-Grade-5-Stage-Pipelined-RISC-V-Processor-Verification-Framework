@@ -1,24 +1,32 @@
 v 4
-file . "rtl/core/datapath.vhd" "dce37a2d01ee2ec7e4c7bab7d3e1a65e16287af3" "20261101173633.997":
-  entity datapath at 1( 0) + 0 on 39;
-  architecture rtl of datapath at 26( 902) + 0 on 40;
-file . "rtl/core/hazard_unit.vhd" "690048e9dedb80066e1cd96866bb8af05074254e" "20261101173633.982":
-  entity hazard_unit at 1( 0) + 0 on 37;
-  architecture rtl of hazard_unit at 27( 793) + 0 on 38;
-file . "rtl/core/pipeline_pkg.vhd" "b7fcd153d884276e66105aeb0c7a12e9b897c722" "20261101173633.914":
-  package pipeline_pkg at 1( 0) + 0 on 26;
-file . "rtl/core/imm_gen.vhd" "794516bf1360461c7c2786f0398608e1ea050da5" "20261101173633.948":
-  entity imm_gen at 1( 0) + 0 on 31;
-  architecture rtl of imm_gen at 16( 468) + 0 on 32;
-file . "rtl/core/alu.vhd" "22332390c583e38972fb508bc8eda91fb54f1f9b" "20261101173633.938":
-  entity alu at 1( 0) + 0 on 29;
-  architecture rtl of alu at 15( 357) + 0 on 30;
-file . "rtl/core/regfile.vhd" "ed115abbb332589f2259bb4b1a9f1ba871259a0d" "20261101173633.927":
-  entity regfile at 1( 0) + 0 on 27;
-  architecture rtl of regfile at 22( 617) + 0 on 28;
-file . "rtl/core/control_unit.vhd" "97dbb334434d251443fcb02c843fa8d2945c9ec9" "20261101173633.959":
-  entity control_unit at 1( 0) + 0 on 33;
-  architecture rtl of control_unit at 22( 712) + 0 on 34;
+file . "rtl/periph/wb_uart.vhd" "18140b78de9c4facddc498c3242b01a3f4ea72ef" "20261101175859.912":
+  entity wb_uart at 1( 0) + 0 on 44;
+  architecture rtl of wb_uart at 19( 389) + 0 on 45;
+file . "rtl/bus/wb_pkg.vhd" "c59f51994e46602c78309b0cd3b40b8e042de330" "20261101175859.885":
+  package wb_pkg at 1( 0) + 0 on 41;
 file . "rtl/core/forwarding_unit.vhd" "f43d880d5bb197ebf2b4bd33bb26ce371faf1f1a" "20261101173633.971":
   entity forwarding_unit at 1( 0) + 0 on 35;
   architecture rtl of forwarding_unit at 19( 593) + 0 on 36;
+file . "rtl/core/control_unit.vhd" "97dbb334434d251443fcb02c843fa8d2945c9ec9" "20261101173633.959":
+  entity control_unit at 1( 0) + 0 on 33;
+  architecture rtl of control_unit at 22( 712) + 0 on 34;
+file . "rtl/core/regfile.vhd" "ed115abbb332589f2259bb4b1a9f1ba871259a0d" "20261101173633.927":
+  entity regfile at 1( 0) + 0 on 27;
+  architecture rtl of regfile at 22( 617) + 0 on 28;
+file . "rtl/core/alu.vhd" "22332390c583e38972fb508bc8eda91fb54f1f9b" "20261101173633.938":
+  entity alu at 1( 0) + 0 on 29;
+  architecture rtl of alu at 15( 357) + 0 on 30;
+file . "rtl/core/imm_gen.vhd" "794516bf1360461c7c2786f0398608e1ea050da5" "20261101173633.948":
+  entity imm_gen at 1( 0) + 0 on 31;
+  architecture rtl of imm_gen at 16( 468) + 0 on 32;
+file . "rtl/core/pipeline_pkg.vhd" "b7fcd153d884276e66105aeb0c7a12e9b897c722" "20261101173633.914":
+  package pipeline_pkg at 1( 0) + 0 on 26;
+file . "rtl/core/hazard_unit.vhd" "690048e9dedb80066e1cd96866bb8af05074254e" "20261101173633.982":
+  entity hazard_unit at 1( 0) + 0 on 37;
+  architecture rtl of hazard_unit at 27( 793) + 0 on 38;
+file . "rtl/core/datapath.vhd" "dce37a2d01ee2ec7e4c7bab7d3e1a65e16287af3" "20261101173633.997":
+  entity datapath at 1( 0) + 0 on 39;
+  architecture rtl of datapath at 26( 902) + 0 on 40;
+file . "rtl/periph/wb_ram.vhd" "e22516d678642614c50f0d60d35c5fcbe0591e9e" "20261101175859.899":
+  entity wb_ram at 1( 0) + 0 on 42;
+  architecture rtl of wb_ram at 24( 545) + 0 on 43;

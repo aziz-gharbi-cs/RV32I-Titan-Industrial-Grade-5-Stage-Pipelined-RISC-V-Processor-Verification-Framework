@@ -1,0 +1,50 @@
+name: RV32I RTL & Co-Simulation CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  verification:
+    name: GHDL & Cocotb Regression
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install System Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y ghdl build-essential gcc-riscv64-unknown-elf
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Verification Tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install cocotb pytest
+
+      - name: Run ALU Directed & Randomized Verification
+        working-directory: tb
+        run: |
+          make clean
+          make TOPLEVEL=alu COCOTB_TEST_MODULES=tests.test_alu VHDL_SOURCES="../rtl/core/alu.vhd"
+
+      - name: Run 5-Stage Datapath Co-Simulation Regression
+        working-directory: tb
+        run: |
+          make clean
+          make
+
+      - name: Publish Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-results
+          path: tb/results.xml

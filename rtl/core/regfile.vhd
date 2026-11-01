@@ -36,8 +36,14 @@ begin
         end if;
     end process;
 
-    -- Asynchronous Read (Zero register bypass)
-    rdata1 <= (others => '0') when to_integer(unsigned(raddr1)) = 0 else regs(to_integer(unsigned(raddr1)));
-    rdata2 <= (others => '0') when to_integer(unsigned(raddr2)) = 0 else regs(to_integer(unsigned(raddr2)));
+    -- Asynchronous Read with internal WB-bypass:
+    -- If reading the register currently being written in WB, forward wdata immediately.
+    rdata1 <= (others => '0') when to_integer(unsigned(raddr1)) = 0 else
+              wdata           when (wen = '1' and waddr = raddr1) else
+              regs(to_integer(unsigned(raddr1)));
+
+    rdata2 <= (others => '0') when to_integer(unsigned(raddr2)) = 0 else
+              wdata           when (wen = '1' and waddr = raddr2) else
+              regs(to_integer(unsigned(raddr2)));
 
 end architecture rtl;

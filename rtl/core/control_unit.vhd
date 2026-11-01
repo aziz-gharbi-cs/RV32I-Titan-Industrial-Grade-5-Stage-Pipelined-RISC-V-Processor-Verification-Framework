@@ -34,7 +34,7 @@ begin
         alu_op     <= "0000";
 
         case opcode is
-            -- R-type: ADD, SUB, SLL, SLT, SLTU, XOR, SRL, SRA, OR, AND
+            -- R-type
             when "0110011" =>
                 reg_write <= '1';
                 alu_src   <= '0';
@@ -60,7 +60,7 @@ begin
                     when others => null;
                 end case;
 
-            -- I-type Arithmetic: ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI
+            -- I-type Arithmetic
             when "0010011" =>
                 reg_write <= '1';
                 alu_src   <= '1';
@@ -81,28 +81,34 @@ begin
                     when others => null;
                 end case;
 
+            -- U-type: LUI
+            when "0110111" =>
+                reg_write <= '1';
+                alu_src   <= '1';
+                alu_op    <= "1010"; -- Pass operand B (imm_u)
+
             -- I-type Load: LW
             when "0000011" =>
                 reg_write  <= '1';
                 mem_read   <= '1';
                 alu_src    <= '1';
                 mem_to_reg <= '1';
-                alu_op     <= "0000"; -- ADD (base + offset)
+                alu_op     <= "0000"; -- ADD
 
             -- S-type Store: SW
             when "0100011" =>
                 mem_write <= '1';
                 alu_src   <= '1';
-                alu_op    <= "0000"; -- ADD (base + offset)
+                alu_op    <= "0000"; -- ADD
 
-            -- B-type Branch: BEQ, BNE, BLT, BGE
+            -- B-type Branch
             when "1100011" =>
                 branch  <= '1';
                 alu_src <= '0';
                 case funct3 is
-                    when "000" | "001" => alu_op <= "0001"; -- SUB for BEQ/BNE comparison
-                    when "100" | "101" => alu_op <= "0011"; -- SLT for BLT/BGE signed
-                    when "110" | "111" => alu_op <= "0100"; -- SLTU for BLTU/BGEU unsigned
+                    when "000" | "001" => alu_op <= "0001"; -- SUB
+                    when "100" | "101" => alu_op <= "0011"; -- SLT
+                    when "110" | "111" => alu_op <= "0100"; -- SLTU
                     when others => null;
                 end case;
 
