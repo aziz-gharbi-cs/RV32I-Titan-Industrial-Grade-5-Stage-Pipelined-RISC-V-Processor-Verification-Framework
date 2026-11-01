@@ -1,10 +1,2 @@
 <?xml version='1.0' encoding='utf-8'?>
-<testsuites name="cocotb tests"><testsuite name="tests.test_datapath" errors="0" failures="1" skipped="0" tests="1" time="0.002" timestamp="2026-11-01T17:41:22.566649+00:00" hostname="Aziz"><testcase classname="tests.test_datapath" name="test_datapath_co_simulation" time="0.002"><failure message="MISMATCH at cycle 8 for reg x4: DUT=0x00000028, REF=0x00000019&#10;assert 40 == 25" type="AssertionError">Traceback (most recent call last):
-  File "/home/azizg/rv32i-titan-core/tb/tests/test_datapath.py", line 84, in test_datapath_co_simulation
-    assert actual_data == expected_data, (
-    ...&lt;2 lines&gt;...
-    )
-AssertionError: MISMATCH at cycle 8 for reg x4: DUT=0x00000028, REF=0x00000019
-assert 40 == 25
-</failure><properties><property name="cocotb" value="True" /><property name="random_seed" value="1793554882" /><property name="file" value="/home/azizg/rv32i-titan-core/tb/tests/test_datapath.py" /><property name="line" value="25" /><property name="sim_time_unit" value="ns" /><property name="sim_time_start" value="0.0" /><property name="sim_time_stop" value="100.0" /><property name="sim_time_duration" value="100.0" /><property name="sim_time_ratio" value="41218.53530912816" /></properties><system-err>Test failed with COCOTB_RANDOM_SEED=1793554882
-</system-err></testcase></testsuite></testsuites>
+<testsuites name="cocotb tests"><testsuite name="tests.test_datapath" errors="0" failures="0" skipped="0" tests="1" time="0.005" timestamp="2026-11-01T17:44:45.936349+00:00" hostname="Aziz"><testcase classname="tests.test_datapath" name="test_datapath_co_simulation" time="0.005"><properties><property name="cocotb" value="True" /><property name="random_seed" value="1793555085" /><property name="file" value="/home/azizg/rv32i-titan-core/tb/tests/test_datapath.py" /><property name="line" value="25" /><property name="sim_time_unit" value="ns" /><property name="sim_time_start" value="0.0" /><property name="sim_time_stop" value="610.0" /><property name="sim_time_duration" value="610.0" /><property name="sim_time_ratio" value="116286.16308216477" /></properties></testcase></testsuite></testsuites>
