@@ -1,0 +1,24 @@
+v 4
+file / "/home/azizg/rv32i-titan-core/tb/../rtl/core/pipeline_pkg.vhd" "b7fcd153d884276e66105aeb0c7a12e9b897c722" "20261101174122.229":
+  package pipeline_pkg at 1( 0) + 0 on 11;
+file / "/home/azizg/rv32i-titan-core/tb/../rtl/core/regfile.vhd" "ed115abbb332589f2259bb4b1a9f1ba871259a0d" "20261101174122.229":
+  entity regfile at 1( 0) + 0 on 12;
+  architecture rtl of regfile at 22( 617) + 0 on 13;
+file / "/home/azizg/rv32i-titan-core/tb/../rtl/core/alu.vhd" "22332390c583e38972fb508bc8eda91fb54f1f9b" "20261101174122.229":
+  entity alu at 1( 0) + 0 on 22;
+  architecture rtl of alu at 15( 357) + 0 on 23;
+file / "/home/azizg/rv32i-titan-core/tb/../rtl/core/imm_gen.vhd" "794516bf1360461c7c2786f0398608e1ea050da5" "20261101174122.229":
+  entity imm_gen at 1( 0) + 0 on 14;
+  architecture rtl of imm_gen at 16( 468) + 0 on 15;
+file / "/home/azizg/rv32i-titan-core/tb/../rtl/core/control_unit.vhd" "97dbb334434d251443fcb02c843fa8d2945c9ec9" "20261101174122.229":
+  entity control_unit at 1( 0) + 0 on 16;
+  architecture rtl of control_unit at 22( 712) + 0 on 17;
+file / "/home/azizg/rv32i-titan-core/tb/../rtl/core/forwarding_unit.vhd" "f43d880d5bb197ebf2b4bd33bb26ce371faf1f1a" "20261101174122.229":
+  entity forwarding_unit at 1( 0) + 0 on 20;
+  architecture rtl of forwarding_unit at 19( 593) + 0 on 21;
+file / "/home/azizg/rv32i-titan-core/tb/../rtl/core/hazard_unit.vhd" "690048e9dedb80066e1cd96866bb8af05074254e" "20261101174122.229":
+  entity hazard_unit at 1( 0) + 0 on 18;
+  architecture rtl of hazard_unit at 27( 793) + 0 on 19;
+file / "/home/azizg/rv32i-titan-core/tb/../rtl/core/datapath.vhd" "dce37a2d01ee2ec7e4c7bab7d3e1a65e16287af3" "20261101174122.229":
+  entity datapath at 1( 0) + 0 on 24;
+  architecture rtl of datapath at 26( 902) + 0 on 25;
