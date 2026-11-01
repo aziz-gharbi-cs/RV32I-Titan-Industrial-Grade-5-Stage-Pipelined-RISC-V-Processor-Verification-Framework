@@ -11,10 +11,11 @@ entity control_unit is
         reg_write    : out std_logic;
         mem_write    : out std_logic;
         mem_read     : out std_logic;
-        alu_src      : out std_logic; -- '0' = rs2, '1' = immediate
+        alu_src      : out std_logic;
         branch       : out std_logic;
         jump         : out std_logic;
-        mem_to_reg   : out std_logic; -- '0' = ALU result, '1' = Memory read data
+        is_auipc     : out std_logic;
+        mem_to_reg   : out std_logic_vector(1 downto 0); -- "00"=ALU, "01"=MEM, "10"=PC+4
         alu_op       : out std_logic_vector(3 downto 0)
     );
 end entity control_unit;
@@ -30,14 +31,16 @@ begin
         alu_src    <= '0';
         branch     <= '0';
         jump       <= '0';
-        mem_to_reg <= '0';
+        is_auipc   <= '0';
+        mem_to_reg <= "00";
         alu_op     <= "0000";
 
         case opcode is
             -- R-type
             when "0110011" =>
-                reg_write <= '1';
-                alu_src   <= '0';
+                reg_write  <= '1';
+                alu_src    <= '0';
+                mem_to_reg <= "00";
                 case funct3 is
                     when "000" =>
                         if funct7_bit30 = '1' then
@@ -62,8 +65,9 @@ begin
 
             -- I-type Arithmetic
             when "0010011" =>
-                reg_write <= '1';
-                alu_src   <= '1';
+                reg_write  <= '1';
+                alu_src    <= '1';
+                mem_to_reg <= "00";
                 case funct3 is
                     when "000" => alu_op <= "0000"; -- ADDI
                     when "001" => alu_op <= "0010"; -- SLLI
@@ -83,23 +87,32 @@ begin
 
             -- U-type: LUI
             when "0110111" =>
-                reg_write <= '1';
-                alu_src   <= '1';
-                alu_op    <= "1010"; -- Pass operand B (imm_u)
+                reg_write  <= '1';
+                alu_src    <= '1';
+                mem_to_reg <= "00";
+                alu_op     <= "1010"; -- Pass operand B (imm_u)
+
+            -- U-type: AUIPC (Add Upper Immediate to PC)
+            when "0010111" =>
+                reg_write  <= '1';
+                alu_src    <= '1';
+                is_auipc   <= '1';
+                mem_to_reg <= "00";
+                alu_op     <= "0000"; -- ADD (PC + imm_u)
 
             -- I-type Load: LW
             when "0000011" =>
                 reg_write  <= '1';
                 mem_read   <= '1';
                 alu_src    <= '1';
-                mem_to_reg <= '1';
-                alu_op     <= "0000"; -- ADD
+                mem_to_reg <= "01";
+                alu_op     <= "0000";
 
             -- S-type Store: SW
             when "0100011" =>
-                mem_write <= '1';
-                alu_src   <= '1';
-                alu_op    <= "0000"; -- ADD
+                mem_write  <= '1';
+                alu_src    <= '1';
+                alu_op     <= "0000";
 
             -- B-type Branch
             when "1100011" =>
@@ -114,8 +127,17 @@ begin
 
             -- J-type Jump: JAL
             when "1101111" =>
-                reg_write <= '1';
-                jump      <= '1';
+                reg_write  <= '1';
+                jump       <= '1';
+                mem_to_reg <= "10"; -- Save PC + 4 to rd
+
+            -- I-type Jump: JALR
+            when "1100111" =>
+                reg_write  <= '1';
+                jump       <= '1';
+                alu_src    <= '1';
+                mem_to_reg <= "10"; -- Save PC + 4 to rd
+                alu_op     <= "0000";
 
             when others => null;
         end case;
